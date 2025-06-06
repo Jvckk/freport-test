@@ -12,6 +12,7 @@ import {
   Wrapper,
 } from "../components/auth-components";
 import GithubButton from "../components/github-btn";
+
 export default function CreateAccount() {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);

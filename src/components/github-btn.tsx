@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Button = styled.span`
   margin-top: 50px;
   background-color: white;
-  font-weight: 500;Add commentMore actions
+  font-weight: 500;
   width: 100%;
   color: black;
   padding: 10px 20px;
