@@ -11,12 +11,12 @@ const Form = styled.form`
 `;
 
 const TextArea = styled.textarea`
-  border: 2px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px;
   border-radius: 20px;
   font-size: 16px;
   color: white;
-  background-color: black;
+  background-color: #303031;
   width: 100%;
   resize: none;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -26,16 +26,17 @@ const TextArea = styled.textarea`
   }
   &:focus {
     outline: none;
-    border-color: #1d9bf0;
+    border-color: #028174;
   }
 `;
 
 const AttachFileButton = styled.label`
   padding: 10px 0px;
-  color: #1d9bf0;
+  color: white;
+
   text-align: center;
   border-radius: 20px;
-  border: 1px solid #1d9bf0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -46,7 +47,7 @@ const AttachFileInput = styled.input`
 `;
 
 const SubmitBtn = styled.input`
-  background-color: #1d9bf0;
+  background-color: #028174;
   color: white;
   border: none;
   padding: 10px 0px;
@@ -108,10 +109,10 @@ export default function PostTweetForm() {
         maxLength={180}
         onChange={onChange}
         value={tweet}
-        placeholder="What is happening?!"
+        placeholder="나만의 일상을 공유해보세요!"
       />
       <AttachFileButton htmlFor="file">
-        {file ? "Photo added ✅" : "Add photo"}
+        {file ? "사진 추가 완료" : "사진 추가하기"}
       </AttachFileButton>
       <AttachFileInput
         onChange={onFileChange}
@@ -119,7 +120,7 @@ export default function PostTweetForm() {
         id="file"
         accept="image/*"
       />
-      <SubmitBtn type="submit" value={isLoading ? "Posting..." : "Post"} />
+      <SubmitBtn type="submit" value={isLoading ? "게시중..." : "게시하기"} />
     </Form>
   );
 }

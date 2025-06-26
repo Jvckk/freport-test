@@ -7,9 +7,8 @@ import { deleteObject, ref } from "firebase/storage";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 3fr 1fr;
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 15px;
+  padding: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 `;
 
 const Column = styled.div`
@@ -19,9 +18,9 @@ const Column = styled.div`
 `;
 
 const Photo = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
 `;
 
 const Username = styled.span`
@@ -68,9 +67,9 @@ export default function Tweet({ username, photo, tweet, userId, id }: ITweet) {
       <Column>
         <Username>{username}</Username>
         <Payload>{tweet}</Payload>
-        {user?.uid === userId ? (
+        {/* {user?.uid === userId ? (
           <DeleteButton onClick={onDelete}>Delete</DeleteButton>
-        ) : null}
+        ) : null} */}
       </Column>
       <Column>{photo ? <Photo src={photo} /> : null}</Column>
     </Wrapper>

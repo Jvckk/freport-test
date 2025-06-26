@@ -24,13 +24,13 @@ export const Form = styled.form`
 
 export const Input = styled.input`
   padding: 10px 20px;
-  border-radius: 50px;
+  border-radius: 10px;
   border: none;
   width: 100%;
   font-size: 16px;
   &[type="submit"] {
     cursor: pointer;
-    background-color: #1d9bf0;
+    background-color: #0ab68b;
     color: white;
     &:hover {
       opacity: 0.8;
@@ -46,6 +46,6 @@ export const Error = styled.span`
 export const Switcher = styled.span`
   margin-top: 20px;
   a {
-    color: #1d9bf0;
+    color: #0ab68b;
   }
 `;

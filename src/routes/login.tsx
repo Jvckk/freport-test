@@ -47,13 +47,13 @@ export default function CreateAccount() {
   };
   return (
     <Wrapper>
-      <Title>Log in</Title>
+      <Title>로그인</Title>
       <Form onSubmit={onSubmit}>
         <Input
           onChange={onChange}
           name="email"
           value={email}
-          placeholder="Email"
+          placeholder="이메일"
           type="email"
           required
         />
@@ -61,16 +61,16 @@ export default function CreateAccount() {
           onChange={onChange}
           value={password}
           name="password"
-          placeholder="Password"
+          placeholder="비밀번호"
           type="password"
           required
         />
-        <Input type="submit" value={isLoading ? "Loading..." : "Log in"} />
+        <Input type="submit" value={isLoading ? "로딩중..." : "로그인"} />
       </Form>
       {error !== "" ? <Error>{error}</Error> : null}
       <Switcher>
-        Don't have an account?{" "}
-        <Link to="/create-account">Create one &rarr;</Link>
+        아직 계정이 없으시다면?{" "}
+        <Link to="/create-account">회원가입 &rarr;</Link>
       </Switcher>
       <GithubButton />
     </Wrapper>
