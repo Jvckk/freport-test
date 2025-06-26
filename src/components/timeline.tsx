@@ -11,7 +11,7 @@ import { styled } from "styled-components";
 import { db } from "../firebase";
 import Tweet from "./tweet";
 import type { Unsubscribe } from "firebase/auth";
-
+import NoticeSection from "./notice";
 export interface ITweet {
   id: string;
   photo?: string;
@@ -20,7 +20,12 @@ export interface ITweet {
   username: string;
   createdAt: number;
 }
-
+const Title = styled.div`
+  margin: 20px 0px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,6 +77,8 @@ export default function Timeline() {
   }, []);
   return (
     <Wrapper>
+      <NoticeSection />
+      <Title>전체 게시물</Title>
       {tweets.map((tweet) => (
         <Tweet key={tweet.id} {...tweet} />
       ))}

@@ -25,7 +25,8 @@ const Photo = styled.img`
 
 const Username = styled.span`
   font-weight: 600;
-  font-size: 15px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
 `;
 
 const Payload = styled.p`
@@ -65,11 +66,11 @@ export default function Tweet({ username, photo, tweet, userId, id }: ITweet) {
   return (
     <Wrapper>
       <Column>
-        <Username>{username}</Username>
         <Payload>{tweet}</Payload>
         {/* {user?.uid === userId ? (
           <DeleteButton onClick={onDelete}>Delete</DeleteButton>
         ) : null} */}
+        <Username>{username}</Username>
       </Column>
       <Column>{photo ? <Photo src={photo} /> : null}</Column>
     </Wrapper>
