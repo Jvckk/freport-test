@@ -3,6 +3,17 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { auth, db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
+
+const Wrapper = styled.div`
+  padding: 30px 0px;
+  width: 100%;
+  max-width: 900px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
 const Form = styled.form`
   display: flex;
@@ -60,12 +71,36 @@ const SubmitBtn = styled.input`
   }
 `;
 
+const TitleInput = styled.input`
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 18px;
+  color: white;
+  background-color: #303031;
+  width: 100%;
+  margin-bottom: 8px;
+  &::placeholder {
+    color: #bbb;
+    font-size: 18px;
+  }
+  &:focus {
+    outline: none;
+    border-color: #028174;
+  }
+`;
+
 export default function PostTweetForm() {
   const [isLoading, setLoading] = useState(false);
   const [tweet, setTweet] = useState("");
+  const [title, setTitle] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const navigate = useNavigate();
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTweet(e.target.value);
+  };
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -76,17 +111,25 @@ export default function PostTweetForm() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = auth.currentUser;
-    if (!user || isLoading || tweet === "" || tweet.length > 180) return;
+    if (
+      !user ||
+      isLoading ||
+      tweet === "" ||
+      title === "" ||
+      tweet.length > 180
+    )
+      return;
     try {
       setLoading(true);
-      const doc = await addDoc(collection(db, "tweets"), {
+      const doc = await addDoc(collection(db, "forum1"), {
         tweet,
+        title,
         createdAt: Date.now(),
         username: user.displayName || "Anonymous",
         userId: user.uid,
       });
       if (file) {
-        const locationRef = ref(storage, `tweets/${user.uid}/${doc.id}`);
+        const locationRef = ref(storage, `forum1/${user.uid}/${doc.id}`);
         const result = await uploadBytes(locationRef, file);
         const url = await getDownloadURL(result.ref);
         await updateDoc(doc, {
@@ -94,33 +137,44 @@ export default function PostTweetForm() {
         });
       }
       setTweet("");
+      setTitle("");
       setFile(null);
     } catch (e) {
       console.log(e);
     } finally {
       setLoading(false);
+      navigate("/");
     }
   };
   return (
-    <Form onSubmit={onSubmit}>
-      <TextArea
-        required
-        rows={5}
-        maxLength={180}
-        onChange={onChange}
-        value={tweet}
-        placeholder="나만의 일상을 공유해보세요!"
-      />
-      <AttachFileButton htmlFor="file">
-        {file ? "사진 추가 완료" : "사진 추가하기"}
-      </AttachFileButton>
-      <AttachFileInput
-        onChange={onFileChange}
-        type="file"
-        id="file"
-        accept="image/*"
-      />
-      <SubmitBtn type="submit" value={isLoading ? "게시중..." : "게시하기"} />
-    </Form>
+    <Wrapper>
+      <Form onSubmit={onSubmit}>
+        <TitleInput
+          required
+          maxLength={40}
+          value={title}
+          onChange={onTitleChange}
+          placeholder="제목을 입력하세요"
+        />
+        <TextArea
+          required
+          rows={5}
+          maxLength={180}
+          onChange={onChange}
+          value={tweet}
+          placeholder="나만의 일상을 공유해보세요!"
+        />
+        <AttachFileButton htmlFor="file">
+          {file ? "사진 추가 완료" : "사진 추가하기"}
+        </AttachFileButton>
+        <AttachFileInput
+          onChange={onFileChange}
+          type="file"
+          id="file"
+          accept="image/*"
+        />
+        <SubmitBtn type="submit" value={isLoading ? "게시중..." : "게시하기"} />
+      </Form>
+    </Wrapper>
   );
 }

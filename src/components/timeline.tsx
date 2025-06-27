@@ -16,6 +16,7 @@ export interface ITweet {
   id: string;
   photo?: string;
   tweet: string;
+  title: string;
   userId: string;
   username: string;
   createdAt: number;
@@ -27,6 +28,7 @@ const Title = styled.div`
   color: white;
 `;
 const Wrapper = styled.div`
+  padding: 30px 0px;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -39,7 +41,7 @@ export default function Timeline() {
     let unsubscribe: Unsubscribe | null = null;
     const fetchTweets = async () => {
       const tweetsQuery = query(
-        collection(db, "tweets"),
+        collection(db, "forum1"),
         orderBy("createdAt", "desc"),
         limit(25)
       );
@@ -57,9 +59,11 @@ export default function Timeline() {
         }); */
       unsubscribe = await onSnapshot(tweetsQuery, (snapshot) => {
         const tweets = snapshot.docs.map((doc) => {
-          const { tweet, createdAt, userId, username, photo } = doc.data();
+          const { tweet, title, createdAt, userId, username, photo } =
+            doc.data();
           return {
             tweet,
+            title,
             createdAt,
             userId,
             username,

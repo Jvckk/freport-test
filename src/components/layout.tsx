@@ -26,6 +26,7 @@ const UpperBar = styled.div`
   justify-content: center;
   background-color: #0ab68b;
   width: 100%;
+  padding: 10px 0px;
 `;
 
 const Menu = styled.div`
@@ -48,13 +49,6 @@ const MenuItem = styled.div`
   border-radius: 50%;
   svg {
     width: 30px;
-    fill: white;
-  }
-  &.log-out {
-    border-color: tomato;
-    svg {
-      fill: tomato;
-    }
   }
 `;
 
@@ -117,21 +111,19 @@ export default function Layout() {
           <StyledLink to="/profile">
             <MenuItem onClick={onLogOut} className="log-out">
               <svg
-                fill="currentColor"
-                viewBox="0 0 20 20"
+                data-slot="icon"
+                fill="none"
+                stroke-width="1.5"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
               >
                 <path
-                  clipRule="evenodd"
-                  fillRule="evenodd"
-                  d="M3 4.25A2.25 2.25 0 015.25 2h5.5A2.25 2.25 0 0113 4.25v2a.75.75 0 01-1.5 0v-2a.75.75 0 00-.75-.75h-5.5a.75.75 0 00-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 00.75-.75v-2a.75.75 0 011.5 0v2A2.25 2.25 0 0110.75 18h-5.5A2.25 2.25 0 013 15.75V4.25z"
-                />
-                <path
-                  clipRule="evenodd"
-                  fillRule="evenodd"
-                  d="M19 10a.75.75 0 00-.75-.75H8.704l1.048-.943a.75.75 0 10-1.004-1.114l-2.5 2.25a.75.75 0 000 1.114l2.5 2.25a.75.75 0 101.004-1.114l-1.048-.943h9.546A.75.75 0 0019 10z"
-                />
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                ></path>
               </svg>
             </MenuItem>
           </StyledLink>

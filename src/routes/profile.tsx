@@ -72,20 +72,21 @@ export default function Profile() {
   };
   const fetchTweets = async () => {
     const tweetQuery = query(
-      collection(db, "tweets"),
+      collection(db, "forum1"),
       where("userId", "==", user?.uid),
       orderBy("createdAt", "desc"),
       limit(25)
     );
     const snapshot = await getDocs(tweetQuery);
     const tweets = snapshot.docs.map((doc) => {
-      const { tweet, createdAt, userId, username, photo } = doc.data();
+      const { tweet, createdAt, userId, username, photo, title } = doc.data();
       return {
         tweet,
         createdAt,
         userId,
         username,
         photo,
+        title,
         id: doc.id,
       };
     });

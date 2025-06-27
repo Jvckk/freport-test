@@ -11,6 +11,7 @@ import LoadingScreen from "./components/loading-screen";
 import { auth } from "./firebase";
 import ProtectedRoute from "./components/protected-route";
 import PostTweetForm from "./components/post-tweet-form";
+import DetailedTweet from "./routes/detailed-tweet";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
         path: "post",
         element: <PostTweetForm />,
       },
+      { path: ":did", element: <DetailedTweet /> },
     ],
   },
   {

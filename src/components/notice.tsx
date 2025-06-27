@@ -9,6 +9,7 @@ const NoticeSection = styled.div`
 `;
 
 const NoticeItem = styled.div`
+  cursor: pointer;
   padding: 15px;
   border-bottom: 1px solid #333;
   display: flex;
@@ -44,9 +45,20 @@ const NoticeViews = styled.div`
   font-size: 12px;
 `;
 
+const SectionTitle = styled.h2`
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 export default function Notice() {
   return (
     <NoticeSection>
+      <SectionTitle>📢 공지사항</SectionTitle>
       <NoticeItem>
         <NoticeBadge>공지</NoticeBadge>
         <NoticeTitle>6월 27일 프푸리포트 서비스 점검 안내</NoticeTitle>
